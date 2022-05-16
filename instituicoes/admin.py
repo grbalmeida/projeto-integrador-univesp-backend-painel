@@ -3,18 +3,18 @@ from instituicoes.models import Instituicoes, Categorias, InstAddresses, InstBan
 
 @admin.register(Categorias)
 class CategoriasAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'is_active',)
+    list_display = ('nome',)
     search_fields = ('nome',)
 
 @admin.register(Instituicoes)
 class InstituicoesAdmin(admin.ModelAdmin):
-    list_display = ('inst_name', 'inst_cnpj', 'is_active',)
+    list_display = ('inst_name', 'inst_cnpj',)
     search_fields = ('inst_name', 'inst_cnpj',)
     raw_id_fields = ('cat',)
 
 @admin.register(InstAddresses)
 class InstAddressesAdmin(admin.ModelAdmin):
-    list_display = ('get_instituicao_nome', 'is_active',)
+    list_display = ('get_instituicao_nome',)
     raw_id_fields = ('inst',)
 
     def get_instituicao_nome(self, obj):
@@ -24,7 +24,7 @@ class InstAddressesAdmin(admin.ModelAdmin):
 
 @admin.register(InstBankAccounts)
 class InstBankAccountsAdmin(admin.ModelAdmin):
-    list_display = ('get_instituicao_nome', 'bank_name', 'bank_account_type', 'is_active',)
+    list_display = ('get_instituicao_nome', 'bank_name', 'bank_account_type',)
     raw_id_fields = ('inst',)
 
     def get_instituicao_nome(self, obj):
@@ -34,7 +34,7 @@ class InstBankAccountsAdmin(admin.ModelAdmin):
 
 @admin.register(InstBankPix)
 class InstBankPixAdmin(admin.ModelAdmin):
-    list_display = ('get_instituicao_nome', 'is_active',)
+    list_display = ('get_instituicao_nome',)
 
     def get_instituicao_nome(self, obj):
         return f'{obj.account.inst.inst_name} - {obj.account.bank_name} - {obj.account.bank_account_ag} - Chave: {obj.pix_key}'
@@ -43,7 +43,7 @@ class InstBankPixAdmin(admin.ModelAdmin):
 
 @admin.register(InstContacts)
 class InstContactsAdmin(admin.ModelAdmin):
-    list_display = ('get_instituicao_nome', 'contact_comercial', 'contact_mobile', 'contact_email', 'is_active',)
+    list_display = ('get_instituicao_nome', 'contact_comercial', 'contact_mobile', 'contact_email',)
 
     def get_instituicao_nome(self, obj):
         return obj.inst.inst_name

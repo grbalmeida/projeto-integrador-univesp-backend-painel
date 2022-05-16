@@ -1,3 +1,2 @@
-release: python ./painel/manage.py makemigrations
-release: python ./painel/manage.py migrate
+release: python ./painel/manage.py makemigrations & python ./painel/manage.py migrate
 web: gunicorn ./painel/painel.wsgi

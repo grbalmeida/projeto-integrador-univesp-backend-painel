@@ -10,6 +10,7 @@ from django.db import models
 class Categorias(models.Model):
     cat_id = models.AutoField(primary_key=True)
     nome = models.CharField(unique=True, max_length=100, blank=True, null=True)
+    is_active = models.BooleanField("Publicado?", default=True)
 
     def __str__(self):
         return self.nome or ''
@@ -32,6 +33,7 @@ class InstAddresses(models.Model):
     addr_city = models.CharField(max_length=100, blank=True, null=True)
     addr_state = models.CharField(max_length=100, blank=True, null=True)
     addr_country = models.CharField(max_length=100, blank=True, null=True)
+    is_active = models.BooleanField("Publicado?", default=True)
 
     def __str__(self):
         return self.inst.inst_name or ''
@@ -50,6 +52,7 @@ class InstBankAccounts(models.Model):
     bank_account_ag = models.CharField(max_length=8, blank=True, null=True)
     bank_account_conta = models.CharField(max_length=100, blank=True, null=True)
     bank_account_type = models.TextField(blank=True, null=True)  # This field type is a guess.
+    is_active = models.BooleanField("Publicado?", default=True)
 
     def __str__(self):
         return f'{self.inst.inst_name} - {self.bank_name} - {self.bank_account_ag}' or ''
@@ -66,6 +69,7 @@ class InstBankPix(models.Model):
     account = models.ForeignKey(InstBankAccounts, models.DO_NOTHING, blank=True, null=True)
     pix_key = models.CharField(max_length=100, blank=True, null=True)
     qrcode_file = models.CharField(max_length=100, blank=True, null=True)
+    is_active = models.BooleanField("Publicado?", default=True)
 
     def __str__(self):
         return f'{self.account.inst.inst_name} - {self.account.bank_name} - {self.account.bank_account_ag} - Chave: {self.pix_key}' or ''
@@ -89,6 +93,7 @@ class InstContacts(models.Model):
     contact_twitter = models.CharField(max_length=100, blank=True, null=True)
     contact_linkedin = models.CharField(max_length=100, blank=True, null=True)
     contact_youtube = models.CharField(max_length=100, blank=True, null=True)
+    is_active = models.BooleanField("Publicado?", default=True)
 
     def __str__(self):
         return f'{self.inst.inst_name} - {self.contact_comercial} - {self.contact_mobile} - {self.contact_email}'

@@ -110,10 +110,10 @@ class Instituicoes(models.Model):
     inst_name = models.CharField(max_length=255, blank=True, null=True)
     inst_cnpj = models.CharField(unique=True, max_length=18, blank=True, null=True)
     logo = models.CharField(max_length=100, blank=True, null=True)
-    is_active = models.BooleanField("Publicado?", default=True)
     description = models.CharField(max_length=1000, blank=True, null=True)
     cat = models.ForeignKey(Categorias, models.DO_NOTHING)
     alt_logo = models.CharField(max_length=100, blank=True, null=True)
+    is_active = models.BooleanField("Publicado?", default=True)
 
     def __str__(self):
         return self.inst_name or ''

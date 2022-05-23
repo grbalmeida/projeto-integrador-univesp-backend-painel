@@ -1,5 +1,6 @@
 from django.contrib import admin
 from instituicoes.models import Instituicoes, Categorias, InstAddresses, InstBankAccounts, InstBankPix, InstContacts
+from instituicoes.forms import UploadModelForm
 
 @admin.register(Categorias)
 class CategoriasAdmin(admin.ModelAdmin):
@@ -11,6 +12,8 @@ class InstituicoesAdmin(admin.ModelAdmin):
     list_display = ('inst_name', 'inst_cnpj',)
     search_fields = ('inst_name', 'inst_cnpj',)
     raw_id_fields = ('cat',)
+    readonly_fields = ('scheme_image_tag',)
+    form = UploadModelForm
 
 @admin.register(InstAddresses)
 class InstAddressesAdmin(admin.ModelAdmin):

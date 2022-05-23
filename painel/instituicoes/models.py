@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.utils.safestring import mark_safe
 
 class Categorias(models.Model):
     cat_id = models.AutoField(primary_key=True)
@@ -114,6 +115,18 @@ class Instituicoes(models.Model):
     cat = models.ForeignKey(Categorias, models.DO_NOTHING)
     alt_logo = models.CharField(max_length=100, blank=True, null=True)
     is_active = models.BooleanField("Publicado?", default=True)
+    image_data = models.BinaryField(editable = True, null=True)
+
+    def scheme_image_tag(self):
+        from base64 import b64encode
+        if self.image_data:
+            return mark_safe('<img src = "data: image/png; base64, {}" width="200" height="100">'.format(
+                b64encode(self.image_data).decode('utf8')
+            ))
+        else:
+            return mark_safe('<img src="" />')
+    scheme_image_tag.short_description = 'Image'
+    scheme_image_tag.allow_tags = True
 
     def __str__(self):
         return self.inst_name or ''

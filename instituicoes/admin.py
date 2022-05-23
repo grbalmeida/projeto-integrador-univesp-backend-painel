@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from instituicoes.models import Instituicoes, Categorias, InstAddresses, InstBankAccounts, InstBankPix, InstContacts
 
 @admin.register(Categorias)
@@ -11,6 +12,7 @@ class InstituicoesAdmin(admin.ModelAdmin):
     list_display = ('inst_name', 'inst_cnpj',)
     search_fields = ('inst_name', 'inst_cnpj',)
     raw_id_fields = ('cat',)
+    readonly_fields = ('scheme_image_tag',)
 
 @admin.register(InstAddresses)
 class InstAddressesAdmin(admin.ModelAdmin):
